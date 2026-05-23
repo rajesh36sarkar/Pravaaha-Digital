@@ -1,263 +1,190 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
+
+import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { FaArrowRight, FaPlay, FaStar, FaCheckCircle } from 'react-icons/fa'
-import Hero3D from './Hero3D'
-import TechMarquee from './TechMarquee'
+import { ArrowRight, Play } from 'lucide-react'
 
-const Hero = () => {
-  const [isMobile, setIsMobile] = useState(false)
-  const controls = useAnimation()
+const stats = [
+  {
+    number: '20+',
+    label: 'Projects Delivered',
+  },
+  {
+    number: '10+',
+    label: 'Happy Clients',
+  },
+  {
+    number: '3+',
+    label: 'Years Experience',
+  },
+  {
+    number: '100%',
+    label: 'Responsive Support',
+  },
+]
 
-  useEffect(() => {
-    // Check if mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    // Start animation sequence
-    controls.start('visible')
-    
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [controls])
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        when: "beforeChildren",
-      },
-    },
-  }
-
-  const fadeInUp = {
-    hidden: { 
-      y: isMobile ? 30 : 60, 
-      opacity: 0,
-      scale: 0.95,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 80,
-        damping: 12,
-        duration: 0.8,
-      },
-    },
-  }
-
-  const fadeInScale = {
-    hidden: { 
-      scale: 0.8, 
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 10,
-        delay: 0.4,
-      },
-    },
-  }
-
-  const stats = [
-    { 
-      number: '150+', 
-      label: 'Projects Completed',
-      icon: FaCheckCircle,
-      color: 'from-emerald-500 to-green-500'
-    },
-    { 
-      number: '50+', 
-      label: 'Happy Clients',
-      icon: FaStar,
-      color: 'from-yellow-500 to-orange-500'
-    },
-    { 
-      number: '5+', 
-      label: 'Years Experience',
-      icon: FaStar,
-      color: 'from-blue-500 to-cyan-500'
-    },
-    { 
-      number: '99%', 
-      label: 'Client Satisfaction',
-      icon: FaStar,
-      color: 'from-purple-500 to-pink-500'
-    },
-  ]
-
+export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Three.js Background - Hidden on mobile for performance */}
-      <div className="hidden md:block">
-        <Hero3D />
+    <section className="relative overflow-hidden bg-[#FAFAFC] pt-32 pb-24 md:pt-40 md:pb-32">
+      {/* Background Gradients */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#9CB4CC]/30 rounded-full blur-3xl" />
+
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#F2D7D9]/40 rounded-full blur-3xl" />
       </div>
 
-      {/* Mobile Background */}
-      <div className="absolute inset-0 md:hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-purple-900/30 to-[#0f172a]" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-float" />
-      </div>
+      {/* Grid Texture */}
+      <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:60px_60px]" />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/70 via-[#0f172a]/50 to-[#0f172a]/95 z-10" />
+      <div className="container-width relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-soft border border-[#E5E7EB] mb-8">
+              <div className="w-2 h-2 rounded-full bg-[#748DA6]" />
 
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-          className="flex flex-col items-center text-center"
-        >
-          {/* Badge */}
-          <motion.div variants={fadeInScale} className="mb-6 md:mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-indigo-500/20">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-indigo-400 text-xs sm:text-sm font-medium">
-                🚀 Leading Digital Solutions Agency
+              <span className="text-sm font-medium text-[#748DA6]">
+                Premium Digital Solutions Agency
               </span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] text-[#1F2937]">
+              We Build Modern
+              <span className="gradient-text block mt-2">
+                Digital Experiences
+              </span>
+              For Growing Businesses
+            </h1>
+
+            {/* Description */}
+            <p className="mt-8 text-lg md:text-xl max-w-2xl text-[#6B7280] leading-relaxed">
+              Helping businesses establish a powerful online presence through
+              premium websites, branding, and digital solutions designed to
+              drive real growth.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <Link href="/contact">
+                <button className="group flex items-center justify-center gap-2 rounded-2xl bg-[#748DA6] px-7 py-4 text-white font-medium shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-glow">
+                  Start Your Project
+
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </button>
+              </Link>
+
+              <Link href="/projects">
+                <button className="glass flex items-center justify-center gap-2 rounded-2xl px-7 py-4 text-[#1F2937] font-medium transition-all duration-300 hover:bg-white/80">
+                  <Play className="w-4 h-4 fill-[#748DA6] text-[#748DA6]" />
+
+                  View Our Work
+                </button>
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.3 }}
+                  className="rounded-3xl bg-white border border-[#E5E7EB] p-5 shadow-soft"
+                >
+                  <h3 className="text-3xl font-bold text-[#748DA6]">
+                    {stat.number}
+                  </h3>
+
+                  <p className="mt-2 text-sm text-[#6B7280]">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Main Heading */}
-          <motion.div variants={fadeInUp} className="mb-6 md:mb-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight px-2">
-              <span className="gradient-text block md:inline">
-                Digital Excellence
-              </span>
-              <span className="block md:inline text-white md:ml-4">
-                Delivered
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Subtitle */}
-          <motion.div variants={fadeInUp} className="mb-8 md:mb-10 max-w-2xl">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed px-4">
-              Transform your vision into reality with cutting-edge digital solutions.
-              We craft exceptional websites, apps, and digital experiences that drive growth.
-            </p>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div 
-            variants={fadeInUp}
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center w-full max-w-md sm:max-w-none px-4"
-          >
-            <Link href="/contact" className="w-full sm:w-auto">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto group px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full font-semibold text-base md:text-lg flex items-center justify-center gap-2 hover:shadow-2xl hover:shadow-indigo-500/25 transition-all duration-300"
-              >
-                Start Your Project
-                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-            </Link>
-            
-            <Link href="/projects" className="w-full sm:w-auto">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 glass-card text-white rounded-full font-semibold text-base md:text-lg flex items-center justify-center gap-2 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-              >
-                <FaPlay className="text-indigo-400 text-sm" />
-                View Our Work
-              </motion.button>
-            </Link>
-          </motion.div>
-
-          {/* Stats Grid */}
+          {/* Right Content */}
           <motion.div
-            variants={fadeInUp}
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mt-12 md:mt-16 lg:mt-20 w-full max-w-4xl px-2"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { type: 'spring', stiffness: 300 }
-                }}
-                className="group relative"
-              >
-                <div className="glass-card p-4 md:p-6 text-center hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-indigo-500/20">
-                  {/* Icon */}
-                  <div className={`inline-flex p-2 rounded-lg bg-gradient-to-br ${stat.color} bg-opacity-10 mb-2 md:mb-3`}>
-                    <stat.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                  </div>
-                  
-                  {/* Number */}
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-1">
-                    {stat.number}
-                  </div>
-                  
-                  {/* Label */}
-                  <div className="text-xs sm:text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-                    {stat.label}
-                  </div>
+            {/* Main Mockup */}
+            <div className="relative rounded-[32px] bg-white p-4 shadow-2xl border border-[#E5E7EB]">
+              {/* Browser Top */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-3 h-3 rounded-full bg-[#F2D7D9]" />
+                <div className="w-3 h-3 rounded-full bg-[#D3CEDF]" />
+                <div className="w-3 h-3 rounded-full bg-[#9CB4CC]" />
+              </div>
 
-                  {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 transition-all duration-500" />
+              {/* Mockup Content */}
+              <div className="rounded-3xl bg-gradient-to-br from-[#748DA6]/10 to-[#9CB4CC]/20 p-8 min-h-[420px] flex flex-col justify-between">
+                <div>
+                  <div className="w-32 h-4 rounded-full bg-[#748DA6]/20 mb-4" />
+
+                  <div className="w-52 h-8 rounded-full bg-[#748DA6]/30 mb-6" />
+
+                  <div className="space-y-3">
+                    <div className="w-full h-3 rounded-full bg-[#9CB4CC]/30" />
+
+                    <div className="w-[80%] h-3 rounded-full bg-[#9CB4CC]/30" />
+
+                    <div className="w-[60%] h-3 rounded-full bg-[#9CB4CC]/30" />
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
-            className="hidden md:block mt-12 md:mt-16"
-          >
+                {/* Cards */}
+                <div className="grid grid-cols-2 gap-4 mt-10">
+                  <div className="rounded-2xl bg-white p-5 shadow-soft">
+                    <div className="w-10 h-10 rounded-xl bg-[#748DA6]/20 mb-4" />
+
+                    <div className="w-20 h-3 rounded-full bg-[#748DA6]/20 mb-2" />
+
+                    <div className="w-14 h-3 rounded-full bg-[#9CB4CC]/20" />
+                  </div>
+
+                  <div className="rounded-2xl bg-white p-5 shadow-soft">
+                    <div className="w-10 h-10 rounded-xl bg-[#F2D7D9]/50 mb-4" />
+
+                    <div className="w-20 h-3 rounded-full bg-[#748DA6]/20 mb-2" />
+
+                    <div className="w-14 h-3 rounded-full bg-[#9CB4CC]/20" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Card */}
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ 
-                duration: 2, 
+              animate={{ y: [0, -10, 0] }}
+              transition={{
+                duration: 4,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: 'easeInOut',
               }}
-              className="flex flex-col items-center gap-2 text-gray-400"
+              className="absolute -bottom-8 -left-8 hidden md:block"
             >
-              <span className="text-sm">Scroll to explore</span>
-              <div className="w-6 h-10 rounded-full border-2 border-gray-400 flex justify-center">
-                <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2"
-                />
+              <div className="glass rounded-3xl p-5 shadow-soft">
+                <p className="text-sm text-[#6B7280] mb-2">
+                  Client Satisfaction
+                </p>
+
+                <h3 className="text-3xl font-bold text-[#748DA6]">
+                  99%
+                </h3>
               </div>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-
-      {/* Tech Marquee at Bottom */}
-      <TechMarquee />
     </section>
   )
 }
-
-export default Hero
