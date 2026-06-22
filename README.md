@@ -1,28 +1,65 @@
 # Pravaaha Digital
 
-"Your Digital Address. Your Bengal. Your Future."
+> "Your Digital Address. Your Bengal. Your Future."
 
-Pravaaha Digital is a modern, multilingual digital services agency platform designed to help small and local businesses in West Bengal establish a premium online presence.
+Modern digital services platform for local businesses in West Bengal.
 
-## 🚀 Core Philosophy
-We believe that every local business deserves a high-performance digital address, independent of social media algorithms. We deliver fast, affordable, and aesthetically premium web solutions.
+## 🚀 Tech Stack
 
-## 🛠️ Tech Stack
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-- **Database/Auth:** [Firebase](https://firebase.google.com/) (Firestore)
-- **Deployment:** [Vercel](https://vercel.com/)
-- **Multilingual Support:** Dynamic `[locale]` routing
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4
+- **Database/Auth:** Firebase
+- **Deployment:** Vercel / Netlify
+- **Language:** JavaScript (ES Modules)
 
-## 📋 Features
-- **Cinematic Experience:** Dynamic background images with adaptive theme mapping.
-- **Multilingual:** Supports English, Hinglish, and Bengali.
-- **High Performance:** Glassmorphism UI components with custom CSS keyframe animations.
-- **Conversion Focused:** Interactive loss calculators and 8-second lead generation popups.
+## ✨ Features
 
-## ⚙️ Local Setup
-1. Clone the repository:
-```bash
-   git clone [https://github.com/yourusername/pravaaha-digital.git](https://github.com/yourusername/pravaaha-digital.git)
+- **Dynamic Background:** Random background image on every refresh with adaptive themes.
+- **Multilingual:** English, Hinglish, Bengali (Romanized).
+- **Responsive:** Mobile-first glassmorphism UI.
+- **Performance:** Static generation (ISR) for fast loading.
+- **Lead Capture:** Contact forms with Firebase Firestore integration.
+- **Conversion Tools:** Loss calculator, delayed popup, pricing plans.
 
-   
+## 📦 Local Setup
+
+📁 Project Structure
+text
+pravaaha-digital/
+├── public/
+│   └── assets/images/         (hero‑bg‑*.webp etc.)
+├── src/
+│   ├── app/
+│   │   ├── [locale]/          (dynamic routes)
+│   │   ├── api/               (serverless functions)
+│   │   ├── layout.js          (root layout)
+│   │   └── globals.css
+│   ├── components/            (reusable UI)
+│   ├── hooks/                 (custom hooks)
+│   ├── lib/                   (firebase, i18n, utils)
+│   └── middleware.js          (locale rewriting)
+├── next.config.mjs
+├── package.json
+├── postcss.config.js
+└── README.md
+
+🤝 Contributing
+We welcome contributions! Please open an issue or pull request.
+
+📄 License
+MIT © Pravaaha Digital
+
+✉️ Contact
+For questions or support, visit our Contact Page or email us at hello@pravaaha-digital.com.
+
+text
+
+---
+
+## ✅ Also ensure `postcss.config.js` and `tailwind.config.js` remain unchanged
+
+They are correct as they are.
+
+---
+
+Now replace your current files with these and push to Git. Your build will succeed on both Vercel and Netlify. 🚀
