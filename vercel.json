@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "regions": ["iad1"], 
+  "crons": [
+    {
+      "path": "/api/keep-warm",
+      "schedule": "*/10 * * * *"
+    }
+  ]
+}
