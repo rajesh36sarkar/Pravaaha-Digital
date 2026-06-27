@@ -1,20 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  reactStrictMode: true,
-
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com',
-        pathname: '/**',
-      },
-    ],
-    formats: ['image/avif', 'image/webp'],
+    domains: ['res.cloudinary.com'],
   },
-
-  // Add redirects or rewrites here if needed
+  experimental: {
+    serverActions: true,
+  },
 };
 
 export default nextConfig;
